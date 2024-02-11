@@ -17,7 +17,7 @@ public class ExitButton extends UI implements Button{
     
 
     public ExitButton(int x, int y, int w, int h) {
-        super(x, y, w, h,ObjectType.Button, new Color(255, 20, 20, 100));
+        super(x, y, w, h, ObjectType.Button, new Color(255, 20, 20, 100));
     }
 
     @Override

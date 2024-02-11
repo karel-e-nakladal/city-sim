@@ -14,6 +14,7 @@ import Game.UI.Elements.ExitButton;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import Game.UI.UI;
+import Game.Objects.ObjectType;
 /**
  *
  * @author Karel
@@ -52,10 +53,10 @@ public class Game extends Canvas implements Runnable{
     public void init(){
         this.handler = new Handler();
         
-        this.handler.addObject(new BuildMenu(0, getHeight() - 10 * cellSize, getWidth(), 10 * cellSize), "UI");
-        this.handler.addObject(new ExitButton(cellSize, cellSize, 2*cellSize, 2*cellSize), "UI");
+        this.handler.addObject(new BuildMenu(0, getHeight() - 10 * cellSize, getWidth(), 10 * cellSize), ObjectType.UI);
+        this.handler.addObject(new ExitButton(cellSize, cellSize, 2*cellSize, 2*cellSize), ObjectType.Button);
         
-        this.handler.addObject(new World(40 * cellSize, 40 * cellSize), "scene");
+        this.handler.addObject(new World(40 * cellSize, 40 * cellSize), ObjectType.World);
         
         this.addMouseListener(new MouseInput(handler));
     }
@@ -95,8 +96,8 @@ public class Game extends Canvas implements Runnable{
             if(System.currentTimeMillis() - timer > 1000){
                 System.out.println("TPS: " + updates  + " FPS: " + frames);
                 System.out.println("Count of game objects " + handler.getObjectsCount("all"));
-                timer += 1000;
-                frames = 0;
+                timer += 1000; 
+               frames = 0;
                 updates = 0;
             }
             

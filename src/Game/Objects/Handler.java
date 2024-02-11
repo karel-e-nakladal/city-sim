@@ -5,6 +5,7 @@
 package Game.Objects;
 
 import java.awt.Graphics;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 /**
  *
@@ -12,9 +13,7 @@ import java.util.LinkedList;
  */
 public class Handler {
     
-    private LinkedList<GameObject> objects = new LinkedList<GameObject>();
-    private LinkedList<GameObject> userInterface = new LinkedList<GameObject>();
-    private LinkedList<GameObject> scene = new LinkedList<GameObject>();
+    private LinkedHashMap<ObjectType,GameObject> objects = new LinkedHashMap<ObjectType,GameObject>();
     
     private GameObject tmpObject;
             
@@ -58,10 +57,11 @@ public class Handler {
     
     /**
      * Function to add game object
+     * @param type - type of object you want to add
      * @param object - game object to add to the array 
      */
-    public void addObject(GameObject object){
-        objects.add(object);
+    public void addObject(ObjectType type, GameObject object){
+        objects.put(type, object);
     }
     /**
      * 
@@ -84,27 +84,13 @@ public class Handler {
     
     /**
      * Function to remove game object
-     * @param id - id of object you want to remove
-     */
-    public void removeObject(int id){
-        objects.remove(id);
-    }
-    /**
-     * 
-     * @param id - id of object you want to remove
      * @param type - type of object you want to remove
+     * @param object - game object
      */
-    public void removeObject(int id, String type){
-                switch(type){
-            case"UI":
-                userInterface.remove(id);
-                break;
-            case"scene":
-                scene.remove(id);
-            default:
-                objects.remove(id);
-        }
+    public void removeObject(ObjectType type, GameObject object){
+        objects.remove(type, object);
     }
+
     
     /**
      * Returns list of objects
@@ -136,13 +122,13 @@ public class Handler {
     public int getObjectsCount(){
         return objects.size();
     }
-    public int getObjectsCount(String type){
+    public int getObjectsCount(ObjectTypet type){
         switch(type){
-            case"all":
+            case ObjectType.Button:
                 return userInterface.size() + scene.size() + objects.size();
-            case"UI":
+            case ObjectType.UI:
                 return userInterface.size();
-            case"scene":
+            case ObjectType.World:
                 return scene.size();
             default:
                 return 0;
